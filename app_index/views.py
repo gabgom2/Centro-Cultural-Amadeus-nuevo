@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from datetime import datetime
+
 #from django.contrib import messages
 #from django.http import HttpResponse
 
@@ -22,3 +23,4 @@ def testing(request):
     numeros_unoaldiez = range(1, 11)
     contexto = {"fecha":fecha_actual, "numeros": numeros_unoaldiez}
     return render(request, "app_index/test.html", contexto)
+

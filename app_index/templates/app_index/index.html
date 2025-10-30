@@ -61,11 +61,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href=#>Listado Estudiantes</a>
+                        <a class="nav-link active" href="{% url 'estudiantelistado' %}">Listado Estudiantes</a>
                     </li>        
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'about' %}">Sobre mí</a>
-                    </li>                                   
                     <!-- Menú desplegable -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -77,6 +74,10 @@
                             <li><a class="dropdown-item" href=#>Docentes</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'about' %}">Sobre mí</a>
+                    </li>                                   
+
                 </ul>
             </div>
         </div>
