@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import *
 #from django.http import HttpResponse
@@ -15,10 +15,8 @@ def estudiante_listado(request):
         #si no se encuentra la busqueda
         if not query_estudiante.exists():
             query_estudiante = Estudiante.objects.all().order_by("apellido")
-            mensaje = "No se encontraron estudiantes con ese apellido, mostrando todos los resultados"
+            messages.warning(request, "No se encontraron estudiantes con ese apellido, mostrando todos los resultados.")
     else: 
-        # Si no hay búsqueda, no mostrar nada (tabla no aparece)
-        # query_estudiante = None
         query_estudiante = Estudiante.objects.all().order_by("apellido")
         
     
@@ -42,3 +40,9 @@ def estudiante_registro(request):
         form = EstudianteForm()    
       
     return render(request, "estudiantes/estudianteregistro.html", {'form': form})
+
+def estudiante_eliminar(request, dni):
+    estudiante = get_object_or_404(Estudiante, dni=dni)
+    estudiante.delete()
+    messages.success(request, "Estudiante eliminado con éxito")
+    return redirect("estudiantelistado")
