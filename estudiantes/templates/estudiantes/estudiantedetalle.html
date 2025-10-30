@@ -1,0 +1,27 @@
+{% extends "app_index/index.html" %}
+
+{% block contenido_principal %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header encabezado-marron text-white">
+            <h2>Detalles del Estudiante</h2>
+        </div>
+
+        <div class="card-body">
+            <p><strong>Nombre:</strong> {{ estudiante.nombre }}</p>
+            <p><strong>Apellido:</strong> {{ estudiante.apellido }}</p>
+            <p><strong>DNI:</strong> {{ estudiante.dni }}</p>
+            <p><strong>Teléfono:</strong> {{ estudiante.telefono }}</p>
+            <p><strong>Email:</strong> {{ estudiante.email }}</p>
+            <p><strong>Barrio de residencia:</strong> {{ estudiante.barrio_residencia }}</p>
+            <p><strong>Fecha de registro:</strong> {{ estudiante.fecha_registro|date:"d/m/Y H:i" }}</p>
+        </div>
+
+        <div class="card-footer pie-marron-claro text-end">
+            <a href="{% url 'estudiantelistado' %}" class="btn btn-secondary">Volver al listado</a>
+            <a href="{% url 'estudianteeditar' estudiante.dni %}" class="btn btn-warning">Editar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

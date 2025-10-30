@@ -5,7 +5,14 @@
 
     <!-- BANNER -->
     <div class="banner">
-        <h1>{% block titulo_registro %}Registro de Estudiantes{% endblock %}</h1>
+        {% block titulo_registro %}
+        {%if edicion %}
+        <h1>Modificar Estudiantes</h1>
+
+        {% else %}
+        <h1>Registro de Estudiantes</h1>
+        {% endif %}
+        {% endblock %}
     </div>
 
     <div class="container mt-4">
@@ -24,7 +31,13 @@
         <form method = "POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn btn-primary">
+            {% if edicion %}    
+            Modificar
+            {% else %}
+            Registrar
+            {% endif %}
+            </button>
 
         </form>
     </div>
