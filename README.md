@@ -13,7 +13,7 @@ Con el comando `python -m venv "nombre_deseado"` se puede crear un entorno virtu
 
 ### **3- Instalación de requerimentos**
 
-Una vez activado el entorno virtual, instalar django y demás requerimentos con el comando `pip install -r requirements.txt`
+Una vez activado el entorno virtual, instalar django (`pip install django`) y demás requerimentos con el comando `pip install -r requirements.txt`
 
 
 ### **4- Ejecución de servidor**

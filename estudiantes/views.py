@@ -24,3 +24,21 @@ def estudiante_listado(request):
     
     contexto = {"query": query, "query_estudiante": query_estudiante, "mensaje": mensaje}
     return render(request, "estudiantes/estudiantelistado.html", contexto)
+
+#FORM estudiantes
+
+def estudiante_registro(request):
+
+    # GET - Pedir info a la base de datos
+    # POST - Solicitud para crear info / manipular datos
+    
+    if request.method == "POST":
+        form = EstudianteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Estudiante registrado/a con éxito.")
+            form = EstudianteForm()  # limpiar el formulario       
+    else:
+        form = EstudianteForm()    
+      
+    return render(request, "estudiantes/estudianteregistro.html", {'form': form})
