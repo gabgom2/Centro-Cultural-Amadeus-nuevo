@@ -1,0 +1,46 @@
+        body {
+            background-color: #fff8f0; /* Blanco cálido */
+            color: #4e342e; /* Marrón oscuro */
+        }
+
+        .navbar {
+            background-color: #4e342e;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #ffffff !important;
+        }
+
+        .banner {
+            background-color: #6d4c41; /* Marrón medio */
+            color: white;
+            text-align: center;
+            padding: 20px 40px;
+        }
+
+        .banner img {
+            max-width: 300px;
+            /* height: auto; */
+            height: auto;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+
+        .encabezado-marron {
+            background-color: #4e342e; 
+            color: white;
+        }
+
+        .pie-marron-claro {
+            background-color: #D2B48C; /* Marrón claro tipo 'tan' */
+            border-top: 2px solid #8B4513; /* línea separadora marrón oscuro */
+        }
+
+        .footer {
+            background-color: #4e342e;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 220px;
+        }
