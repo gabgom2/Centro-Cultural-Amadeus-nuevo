@@ -26,3 +26,29 @@ class AsignaturaListView(ListView):
             query_asignatura = Asignatura.objects.all().order_by("nombre")
             
         return query_asignatura
+    
+class AsignaturaCreateView(CreateView):
+    model = Asignatura
+    form_class = AsignaturaForm
+    template_name = "academico/asignaturaregistro.html"
+    success_url = reverse_lazy("asignaturalistado")
+    
+    def form_valid(self, form):
+        # se guarda el objeto en response
+        response = super().form_valid(form)
+        messages.success(self.request, f"La asignatura '{self.object.nombre}' fue creada correctamente")
+
+        return response
+
+class AsignaturaDetailView(DetailView):
+    model = Asignatura
+    template_name = "academico/asignaturadetalle.html"
+    context_object_name = "asignatura"
+    slug_field = "codigo"
+    slug_url_kwarg = "codigo"
+
+class AsignaturaUpdateView(UpdateView):
+    pass
+
+class AsignaturaDeleteView(DeleteView):
+    pass

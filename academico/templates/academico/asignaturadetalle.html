@@ -1,0 +1,25 @@
+{% extends "app_index/index.html" %}
+
+{% block contenido_principal %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header encabezado-marron text-white">
+            <h2>Detalles de la Asignatura</h2>
+        </div>
+
+        <div class="card-body">
+            <p><strong>Nombre del curso:</strong> {{ asignatura.nombre }}</p>
+            <p><strong>Nivel:</strong> {{ asignatura.nivel}}</p>
+            <p><strong>Carga Horaria:</strong> {{ asignatura.horas_catedra }}</p>
+            <p><strong>Código:</strong> {{ asignatura.codigo }}</p>
+            <p><strong>Fecha de registro:</strong> {{ asignatura.fecha_registro|date:"d/m/Y H:i" }}</p>
+        </div>
+
+        <div class="card-footer pie-marron-claro text-end">
+            <a href="{% url 'asignaturalistado' %}" class="btn btn-secondary">Volver al listado</a>
+            <a href=# class="btn btn-warning">Editar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

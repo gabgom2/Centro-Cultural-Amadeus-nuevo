@@ -4,13 +4,13 @@ import uuid
 class Asignatura(models.Model):
 
     nivel = [
-        ("n1", "inicial"),
-        ("n2" , "intermedio"),
-        ("n3" ,"avanzado"),
+        ("Inicial", "inicial"),
+        ("Intermedio", "intermedio"),
+        ("Avanzado", "avanzado"),
     ]
     
     nombre = models.CharField(max_length=100, unique=True)
-    nivel = models.CharField(max_length = 2, choices=nivel, default=nivel[0])
+    nivel = models.CharField(max_length = 16, choices=nivel, default=nivel[0])
     horas_catedra = models.IntegerField(default=80)
     
     #autoasignadas
@@ -23,6 +23,11 @@ class Asignatura(models.Model):
                 )
         
     fecha_registro = models.DateTimeField(auto_now_add=True) #Fecha de registro se asigna en el momento de creación por auto_now_add
+    
+    # Guardar solo los últimos 8 caracteres del código para mostrar en la tabla
+    @property
+    def codigo_corto(self):
+        return str(self.codigo)[-8:]
   
     def __str__(self):
         return f"Asignatura: {self.nombre} / Nivel: {self.nivel} / Código: {self.codigo}"
