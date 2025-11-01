@@ -63,8 +63,8 @@
                             <td>{{ asignatura.codigo_corto }}</td>
                             <td class="text-center">
                                 <a href="{% url 'asignaturadetalle' asignatura.codigo %}" class="btn btn-info btn-sm text-white">Ver</a>
-                                <a href=# class="btn btn-warning btn-sm">Editar</a>
-                                <a href=# class="btn btn-danger btn-sm">Eliminar</a>
+                                <a href="{% url 'asignaturaeditar' asignatura.codigo %}" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="{% url 'asignaturaeliminar' asignatura.codigo %}" class="btn btn-danger btn-sm">Eliminar</a>
                             </td>
                         </tr>
                     {% empty %}

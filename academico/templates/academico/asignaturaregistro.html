@@ -7,7 +7,13 @@
     <!-- BANNER -->
     <div class="banner">
         {% block titulo_registro %}
+        {% if object %}
+        <h1>Editar Asignatura</h1>
+        {% else %}
+
         <h1>Registrar Asignatura</h1>
+
+        {% endif %}
         {% endblock %}
     </div>
 
@@ -28,7 +34,11 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">
+            {% if object %}
+            Modificar
+            {% else %}
             Registrar
+            {% endif %}
             </button>
 
         </form>

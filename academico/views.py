@@ -1,4 +1,4 @@
-from django.shortcuts import render
+#from django.shortcuts import render, redirect
 from .models import Asignatura
 from .forms import AsignaturaForm
 from django.urls import reverse_lazy
@@ -48,7 +48,24 @@ class AsignaturaDetailView(DetailView):
     slug_url_kwarg = "codigo"
 
 class AsignaturaUpdateView(UpdateView):
-    pass
+    model = Asignatura
+    form_class = AsignaturaForm
+    template_name = "academico/asignaturaregistro.html"
+    success_url = reverse_lazy("asignaturalistado")
+    slug_field = "codigo"
+    slug_url_kwarg = "codigo"
 
+    
 class AsignaturaDeleteView(DeleteView):
-    pass
+    model = Asignatura
+    template_name = "academico/asignaturaeliminar.html"
+    slug_field = "codigo"
+    slug_url_kwarg = "codigo"
+    success_url = reverse_lazy("asignaturalistado")
+    
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(
+            request, f"La asignatura '{self.object.nombre}' fue eliminada correctamente."
+        )
+        return super().delete(request, *args, **kwargs)
