@@ -24,10 +24,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'estudiantelistado' %}">Listado Estudiantes</a>
-                    </li>        
-                    <!-- Menú desplegable -->
+     
+                    <!-- Menú desplegable Listados-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Listados
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'estudiantelistado' %}">Estudiantes</a></li>
+                            <li><a class="dropdown-item" href="{% url 'asignaturalistado' %}">Asignaturas</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Menú desplegable REGISTRO-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Registro

@@ -1,0 +1,74 @@
+{% extends "app_index/index.html" %}
+
+
+{% block contenido_principal %}
+
+    <!-- BANNER -->
+    <div class="banner">
+        <h1>Listado de Asignaturas</h1>
+        <p>Cada asignatura debe poseer un nombre único</p>
+        
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container mt-4">
+        <!-- Formulario de búsqueda -->
+        <form method="get" class="row justify-content-center mb-4">
+            <div class="col-md-6 col-sm-8">
+                <div class="input-group">
+                    <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Buscar por nombre de asignatura...">
+                    <button class="btn btn-dark" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+
+
+        
+        <!-- Sistema de mensajes de alerta -->
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- Tabla de resultados -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Nivel</th>
+                        <th class="text-center">Carga Horaria</th>
+                        <th class="text-center">id</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asignatura in asignaturas %}
+                        <tr>
+                            <td>{{ asignatura.nombre }}</td>
+                            <td>{{ asignatura.nivel }}</td>
+                            <td>{{ asignatura.horas_catedra }}</td>
+                            <td>{{ asignatura.codigo }}</td>
+                            <td class="text-center">
+                                <a href=# class="btn btn-info btn-sm text-white">Ver</a>
+                                <a href=# class="btn btn-warning btn-sm">Editar</a>
+                                <a href=# class="btn btn-danger btn-sm">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">No se encontraron asignaturas</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+</div>
+
+ {% endblock %}
