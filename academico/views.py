@@ -1,4 +1,4 @@
-#from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect
 from .models import Asignatura
 from .forms import AsignaturaForm
 from django.urls import reverse_lazy
@@ -54,6 +54,11 @@ class AsignaturaUpdateView(UpdateView):
     success_url = reverse_lazy("asignaturalistado")
     slug_field = "codigo"
     slug_url_kwarg = "codigo"
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f"La asignatura '{self.object.nombre}' fue modificada correctamente.")
+        return response
 
     
 class AsignaturaDeleteView(DeleteView):
@@ -63,9 +68,18 @@ class AsignaturaDeleteView(DeleteView):
     slug_url_kwarg = "codigo"
     success_url = reverse_lazy("asignaturalistado")
     
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        messages.success(
-            request, f"La asignatura '{self.object.nombre}' fue eliminada correctamente."
-        )
-        return super().delete(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        #Se sobreescribe post() en lugar de delete() para asegurar ejecución del mensaje
+        obj = self.get_object()
+        obj_name = obj.nombre
+        obj.delete()
+        messages.success(request, f"La asignatura '{obj_name}' fue eliminada correctamente.")
+        return redirect(self.success_url)
+    
+    #def delete(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     messages.success(
+    #         request, f"La asignatura '{self.object.nombre}' fue eliminada correctamente."
+    #     )
+    #     return super().delete(request, *args, **kwargs)

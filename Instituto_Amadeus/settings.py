@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'app_index',
     'estudiantes',
     'academico',
+    'cuentas_usuario',
 ]
 
 MIDDLEWARE = [
@@ -124,5 +125,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+#AUTH_USER_MODEL = "accounts.Usuario"
+MEDIA_URL = "media/" #produccion
+MEDIA_ROOT = BASE_DIR / "media"
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "profile_detail"
+LOGOUT_REDIRECT_URL = "index"

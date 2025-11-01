@@ -11,7 +11,7 @@ class Asignatura(models.Model):
     
     nombre = models.CharField(max_length=100, unique=True)
     nivel = models.CharField(max_length = 16, choices=nivel, default=nivel[0])
-    horas_catedra = models.IntegerField(default=80)
+    horas_catedra = models.IntegerField(default=20)
     
     #autoasignadas
      
