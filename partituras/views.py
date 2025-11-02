@@ -49,7 +49,29 @@ class PartituraDetailView(DetailView):
         return self.ver_pdf(request)
 
 class PartituraUpdateView(UpdateView):
-    pass
+    model = Partitura
+    form_class = PartituraForm
+    template_name = "partituras/partituraregistro.html"  # plantilla para crear/editar
+    success_url = reverse_lazy("partituralistado")
+    slug_field = "codigo"
+    slug_url_kwarg = "codigo"
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f"La partitura '{self.object.titulo}' fue modificada correctamente.")
+        return response
+    
 class PartituraDeleteView(DeleteView):
-    pass
+    model = Partitura
+    template_name = "partituras/partituraeliminar.html"  # plantilla de confirmación
+    slug_field = "codigo"
+    slug_url_kwarg = "codigo"
+    success_url = reverse_lazy("partituralistado")
+
+    def post(self, request, *args, **kwargs):
+        # Sobrescribimos post() para mostrar mensaje antes de redirigir
+        obj = self.get_object()
+        obj_name = obj.titulo
+        obj.delete()
+        messages.success(request, f"La partitura '{obj_name}' fue eliminada correctamente.")
+        return redirect(self.success_url)

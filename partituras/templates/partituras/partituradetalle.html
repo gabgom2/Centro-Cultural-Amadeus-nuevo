@@ -16,11 +16,12 @@
             <p><strong>Autor:</strong> {{ partitura.autor }}</p>
             <p><strong>Arreglista:</strong> {{ partitura.arreglista }}</p>
             <p><strong>Fecha de carga:</strong> {{ partitura.fecha_registro|date:"d/m/Y H:i" }}</p>
+            <p><strong>Código:</strong> {{ partitura.codigo }}</p>
         </div>
 
         <div class="card-footer pie-marron-claro text-end">
             <a href="{% url 'partituralistado' %}" class="btn btn-secondary">Volver al listado</a>
-            <a href=# class="btn btn-warning">Editar</a>
+            <a href="{% url 'partituraeditar' partitura.codigo %}" class="btn btn-warning">Editar</a>
         </div>
     </div>
 </div>

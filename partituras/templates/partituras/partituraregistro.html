@@ -29,7 +29,11 @@
         <!-- Cuerpo principal -->      
         <div class="card shadow-sm">
             <div class="card-header encabezado-marron text-white">
-                <h2>Subir nuevo documento</h2>
+                {% if object %}
+                <h2>Editar información partitura</h2>
+                {% else %}
+                <h2>Cargar partitura</h2>
+                {% endif %}
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">

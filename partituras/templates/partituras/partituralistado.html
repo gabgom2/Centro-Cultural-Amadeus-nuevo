@@ -31,9 +31,8 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Arreglista</th>
-                    <th>Código</th>
                     <th>Archivo</th>
-                    <th>Acciones</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,20 +47,21 @@
                                 <span class="text-muted">—</span>
                             {% endif %}
                         </td>
-                        <td>{{ partitura.codigo_corto }}</td>
+
                         <td>
                             {% if partitura.archivo %}
                                 <a href="{{ partitura.archivo.url }}" target="_blank" class="text-decoration-none">
                                     <i class="bi bi-file-earmark-pdf text-danger"></i> Ver archivo
                                 </a>
+
                             {% else %}
                                 <span class="text-muted">Sin archivo</span>
                             {% endif %}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a href="{% url 'partituradetalle' partitura.codigo %}" class="btn btn-info btn-sm text-white">Detalles</a>
-                            <a href=# class="btn btn-warning btn-sm">Editar</a>
-                            <a href=# class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="{% url 'partituraeditar' partitura.codigo %}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'partituraeliminar' partitura.codigo %}" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 {% empty %}
