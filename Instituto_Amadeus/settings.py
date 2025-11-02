@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_index',
+    'app_index',    #index, about y similares
     'estudiantes',
-    'academico',
-    'cuentas_usuario',
+    'academico',    #asignaturas, CBV
+    'cuentas_usuario',   #sistema de login y permisos
+    'partituras',    #CBV permite subir archivos por cada instancia
 ]
 
 MIDDLEWARE = [
@@ -126,8 +128,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #AUTH_USER_MODEL = "accounts.Usuario"
-MEDIA_URL = "media/" #produccion
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/" #produccion
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "profile_detail"
