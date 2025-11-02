@@ -1,0 +1,79 @@
+{% extends "app_index/index.html" %}
+{% block contenido_principal %}
+
+<div class="container mt-5">
+    <!-- ENCABEZADO -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Listado de Partituras</h2>
+            <p class="text-muted mb-0">Cada partitura puede tener autor, arreglista y archivo PDF adjunto.</p>
+        </div>
+        <a href="{% url 'partituraregistro' %}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Nueva Partitura
+        </a>
+    </div>
+
+    <!-- MENSAJES -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- TABLA DE PARTITURAS -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Arreglista</th>
+                    <th>Código</th>
+                    <th>Archivo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partitura in partituras %}
+                    <tr>
+                        <td>{{ partitura.titulo }}</td>
+                        <td>{{ partitura.autor }}</td>
+                        <td>
+                            {% if partitura.arreglista %}
+                                {{ partitura.arreglista }}
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ partitura.codigo_corto }}</td>
+                        <td>
+                            {% if partitura.archivo %}
+                                <a href="{{ partitura.archivo.url }}" target="_blank" class="text-decoration-none">
+                                    <i class="bi bi-file-earmark-pdf text-danger"></i> Ver archivo
+                                </a>
+                            {% else %}
+                                <span class="text-muted">Sin archivo</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href=# class="btn btn-info btn-sm text-white">Ver</a>
+                            <a href=# class="btn btn-warning btn-sm">Editar</a>
+                            <a href=# class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            No hay partituras registradas.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

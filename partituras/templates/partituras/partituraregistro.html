@@ -1,0 +1,53 @@
+{% extends "app_index/index.html" %}
+{% block contenido_principal %}
+
+
+    <!-- BANNER -->
+    <div class="banner">
+        {% block titulo_registro %}
+        {% if object %}
+        <h1>Editar Partitura</h1>
+        {% else %}
+
+        <h1>Cargar Partitura</h1>
+
+        {% endif %}
+        {% endblock %}
+    </div>
+
+    <div class="container mt-5">
+
+        <!-- Mostrar mensajes -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success text-center" role="alert" id="mensaje-exito">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Cuerpo principal -->      
+        <div class="card shadow-sm">
+            <div class="card-header encabezado-marron text-white">
+                <h2>Subir nuevo documento</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">
+                            {% if object %}
+                            Editar
+                            {% else %}
+                            Cargar
+                            {% endif %}
+                    </button>
+                    <a href="{% url 'partituralistado' %}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
