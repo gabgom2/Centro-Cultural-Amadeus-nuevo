@@ -24,10 +24,10 @@ class Asignatura(models.Model):
         
     fecha_registro = models.DateTimeField(auto_now_add=True) #Fecha de registro se asigna en el momento de creación por auto_now_add
     
-    # Guardar solo los últimos 8 caracteres del código para mostrar en la tabla
+    # Guardar solo los últimos 12 caracteres del código para mostrar en la tabla
     @property
     def codigo_corto(self):
-        return str(self.codigo)[-8:]
+        return str(self.codigo)[-12:]
   
     def __str__(self):
         return f"Asignatura: {self.nombre} / Nivel: {self.nivel} / Código: {self.codigo}"

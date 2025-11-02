@@ -57,10 +57,10 @@
                 <tbody>
                     {% for asignatura in asignaturas %}
                         <tr>
-                            <td>{{ asignatura.nombre }}</td>
-                            <td>{{ asignatura.nivel }}</td>
-                            <td>{{ asignatura.horas_catedra }}</td>
-                            <td>{{ asignatura.codigo_corto }}</td>
+                            <td class="text-center">{{ asignatura.nombre }}</td>
+                            <td class="text-center">{{ asignatura.nivel }}</td>
+                            <td class="text-center">{{ asignatura.horas_catedra }}</td>
+                            <td class="text-center">{{ asignatura.codigo_corto }}</td>
                             <td class="text-center">
                                 <a href="{% url 'asignaturadetalle' asignatura.codigo %}" class="btn btn-info btn-sm text-white">Ver</a>
                                 <a href="{% url 'asignaturaeditar' asignatura.codigo %}" class="btn btn-warning btn-sm">Editar</a>
