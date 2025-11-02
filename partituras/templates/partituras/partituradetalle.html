@@ -1,0 +1,27 @@
+{% extends "app_index/index.html" %}
+
+{% block contenido_principal %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header encabezado-marron text-white">
+            <h2>Detalles de la partitura</h2>
+        </div>
+        <div class="card-body">
+            {% if partitura.archivo %}
+            <!-- <iframe src="{% url 'ver_pdf' partitura.codigo %}" width="600" height="400"></iframe> -->
+            <embed src="{% url 'ver_pdf' partitura.codigo %}" width="80%" height="500px" type="application/pdf">
+            {% endif %}
+            <p><strong>Título:</strong> {{ partitura.titulo }}</p>
+            <p><strong>Autor:</strong> {{ partitura.autor }}</p>
+            <p><strong>Arreglista:</strong> {{ partitura.arreglista }}</p>
+            <p><strong>Fecha de carga:</strong> {{ partitura.fecha_registro|date:"d/m/Y H:i" }}</p>
+        </div>
+
+        <div class="card-footer pie-marron-claro text-end">
+            <a href="{% url 'partituralistado' %}" class="btn btn-secondary">Volver al listado</a>
+            <a href=# class="btn btn-warning">Editar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
