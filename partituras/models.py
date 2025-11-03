@@ -23,7 +23,9 @@ class Partitura(models.Model):
     # Guardar solo los últimos 12 caracteres del código para mostrar en la tabla
     @property
     def codigo_corto(self):
-        return str(self.codigo)[-12:]
+        ultimos = int(self.codigo.int % 10**12)
+        # Devuelve como string de 12 dígitos, rellenando con ceros a la izquierda si es necesario
+        return f"{ultimos:012d}"
     
     def __str__(self):
         return f"Partitura: {self.titulo} / Autor: {self.autor} / Código: {self.codigo_corto}"

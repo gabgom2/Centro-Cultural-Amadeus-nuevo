@@ -31,6 +31,7 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Arreglista</th>
+                    <th>Código</th>
                     <th>Archivo</th>
                     <th class="text-center">Acciones</th>
                 </tr>
@@ -47,7 +48,7 @@
                                 <span class="text-muted">—</span>
                             {% endif %}
                         </td>
-
+                        <td>{{ partitura.codigo_corto }}</td>
                         <td>
                             {% if partitura.archivo %}
                                 <a href="{{ partitura.archivo.url }}" target="_blank" class="text-decoration-none">
