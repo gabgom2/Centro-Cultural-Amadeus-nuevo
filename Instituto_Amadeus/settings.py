@@ -133,6 +133,6 @@ MEDIA_URL = "/media/" #produccion
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "profile_detail"
+LOGIN_REDIRECT_URL = "userdetail"
 LOGOUT_REDIRECT_URL = "index"
 X_FRAME_OPTIONS = 'SAMEORIGIN'
