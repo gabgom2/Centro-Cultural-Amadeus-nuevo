@@ -1,0 +1,64 @@
+
+{% extends "app_index/index.html" %}
+{% block contenido_principal %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4>Mi Perfil</h4>
+                </div>
+
+                <div class="card-body text-center">
+                    <!-- Avatar -->
+                    {% if usuario.avatar %}
+                        <img src="{{ usuario.avatar.url }}" alt="Avatar de {{ usuario.username }}"
+                             class="rounded-circle img-thumbnail mb-3"
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'img/default_avatar.png' %}" alt="Avatar por defecto"
+                             class="rounded-circle img-thumbnail mb-3"
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                    {% endif %}
+
+                    <h5 class="card-title mb-1">{{ usuario.username }}</h5>
+                    <p class="text-muted">{{ usuario.email }}</p>
+
+                    <hr>
+
+                    <!-- Descripción -->
+                    {% if usuario.descripcion %}
+                        <p><strong>Sobre mí:</strong> {{ usuario.descripcion }}</p>
+                    {% else %}
+                        <p class="text-muted">No has añadido una descripción aún.</p>
+                    {% endif %}
+
+                    <!-- Ubicación -->
+                    <p><strong>Ubicación:</strong> {{ usuario.ubicacion|default:"No especificada" }}</p>
+
+                    <!-- Sitio web -->
+                    <p>
+                        <strong>Sitio web:</strong>
+                        {% if usuario.sitio_web %}
+                            <a href="{{ usuario.sitio_web }}" target="_blank">{{ usuario.sitio_web }}</a>
+                        {% else %}
+                            <span class="text-muted">No especificado</span>
+                        {% endif %}
+                    </p>
+
+                    <!-- Fecha de nacimiento -->
+                    <p><strong>Fecha de nacimiento:</strong> {{ usuario.fecha_de_nacimiento|date:"d/m/Y"|default:"No especificada" }}</p>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'usuarioeditar' %}" class="btn btn-primary w-45">Editar perfil</a>
+                        <a href="{% url 'usuariologout' %}" class="btn btn-outline-danger w-45">Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

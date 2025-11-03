@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import *
+from django.contrib.auth.views import LoginView, LogoutView
+from .views import usuariodetalle, usuarioeditar, usuarioregistrar
 
 urlpatterns = [
-    #path("", AsignaturaListView.as_view(), name="asignaturalistado"),
-    #path("asigreg/", AsignaturaCreateView.as_view(), name="asignaturaregistro"),
-    #path("<str:codigo>/detalle", AsignaturaDetailView.as_view(), name="asignaturadetalle"),
-    #path("<str:codigo>/editar", AsignaturaUpdateView.as_view(), name="asignaturaeditar"),
-    #path("<str:codigo>/eliminar", AsignaturaDeleteView.as_view(), name="asignaturaeliminar"),
+    path("login/", LoginView.as_view(template_name="cuentas_usuario/login.html"), name="usuariologin"),
+    path("logout/", LogoutView.as_view(template_name="cuentas_usuario/logout.html"), name="usuariologout"),
+    path("detalle/", usuariodetalle, name="usuariodetalle"),
+    path("editar/", usuarioeditar, name="usuarioeditar"),
+    path("registrar/", usuarioregistrar, name="usuarioregistrar"),
 ]

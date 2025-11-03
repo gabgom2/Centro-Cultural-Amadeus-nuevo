@@ -5,20 +5,33 @@ from .forms import UsuarioChangeForm, UsuarioCreationForm
 
 # Create your views here.
 
-def registrar(request):
+def usuarioregistrar(request):
     if request.method == 'POST':
-        form = UsuarioCreationForm(request.POST) #request.FILES para cargar archivos
+        form = UsuarioCreationForm(request.POST) #request.FILE para cargar archivos
         if form.is_valid():
             usuario = form.save()
             login(request, usuario)
-            return redirect("userdetail")
+            return redirect("usuariodetalle")
     else:
         form = UsuarioCreationForm()
         
     contexto = {"form": form}
-    return render(request, "cuentas/registro.html", contexto)
+    return render(request, "cuentas_usuario/usuarioregistro.html", contexto)
 
 
 @login_required
-def userdetail(request):
-    return render(request, "cuentas/informacion.html", {"usuario": request.user})
+def usuariodetalle(request):
+    return render(request, "cuentas_usuario/usuariodetalle.html", {"usuario": request.user})
+
+
+def usuarioeditar(request):
+    if request.method == 'POST':
+        form = UsuarioChangeForm(request.POST, request.FILE, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("usuariodetalle")
+    else:
+        form = UsuarioChangeForm(instance=request.user)
+        
+    contexto = {"form": form}
+    return render(request, "cuentas_usuario/usuarioeditar.html", contexto)

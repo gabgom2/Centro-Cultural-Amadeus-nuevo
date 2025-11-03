@@ -1,0 +1,30 @@
+{% extends "app_index/index.html" %}
+{% block contenido_principal %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm text-center">
+                <div class="card-header bg-dark text-white">
+                    <h4>Has cerrado sesión</h4>
+                </div>
+                <div class="card-body">
+                    <img src="{% static 'img/logout_icon.png' %}" alt="Logout"
+                         class="img-fluid mb-3" style="width: 80px; opacity: 0.8;">
+
+                    <p class="mb-4">
+                        Gracias por visitar el <strong>Centro Cultural Amadeus</strong>.                        
+                    </p>
+
+                    <a href="{% url 'usuariologin' %}" class="btn btn-primary w-100 mb-2">
+                        Iniciar sesión otra vez
+                    </a>
+
+                    <a href="{% url 'index' %}" class="btn btn-outline-secondary w-100">
+                        Volver al inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

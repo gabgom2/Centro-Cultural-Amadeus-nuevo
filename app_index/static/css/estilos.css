@@ -44,3 +44,30 @@
             padding: 20px 0;
             margin-top: 220px;
         }
+
+        /* Botones de registro */
+
+
+        .btn.btn-registrar {
+            background-color: #8B4513;   /* Marrón medio oscuro */
+            border-color: #6d4c41;       /* Marrón más apagado */
+            color: #fff8f0;              /* Blanco cálido */
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .btn.btn-registrar:hover {
+            background-color: #A0522D;   /* Marrón más claro */
+            border-color: #8B4513;
+            transform: scale(1.03);
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn.btn-registrar:active {
+            background-color: #5D4037;   /* Marrón oscuro */
+            border-color: #4e342e;
+            transform: scale(0.98);
+            box-shadow: 0 2px 4px rgba(78, 52, 46, 0.3);
+        }
