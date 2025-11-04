@@ -38,12 +38,31 @@
                         </ul>
                     </li>
                     
+                    <!-- Admin, borrar en versión final -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/">Admin</a>
+                    </li> 
+                    
+                    <!-- Página /about -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'about' %}">Sobre mí</a>
+                    </li>               
+                                        
                     <!-- Botones dinámicos según login -->
                     {% if user.is_authenticated %}
                         <!-- Si el usuario está logeado -->
                         <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'usuariodetalle' %}">
-                                👤 {{ user.username }}
+                            <a class="nav-link active d-flex align-items-center" href="{% url 'usuariodetalle' %}">
+                                {% if user.avatar %}
+                                    <img src="{{ user.avatar.url }}" alt="Avatar de {{ user.username }}"
+                                        class="rounded-circle me-2"
+                                        style="width: 30px; height: 30px; object-fit: cover;">
+                                {% else %}
+                                    <img src="{% static 'img/default_avatar.png' %}" alt="Avatar por defecto"
+                                        class="rounded-circle me-2"
+                                        style="width: 30px; height: 30px; object-fit: cover;">
+                                {% endif %}
+                                <span class="fw-bold text-center">{{ user.username }}</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -55,23 +74,25 @@
                         </li>
                     {% else %}
                         <!-- Si el usuario NO está logeado -->
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'usuarioregistrar' %}">Registrarse</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active fw-semibold" href="#" id="navbarLoginDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuario
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarLoginDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'usuariologin' %}">
+                                        Iniciar sesión
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'usuarioregistrar' %}">
+                                        Registrarse
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'usuariologin' %}">Iniciar sesión</a>
-                        </li>
-                    {% endif %} 
-
-                    <!-- Admin, borrar en versión final -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/admin/">Admin</a>
-                    </li> 
-                    
-                    <!-- Página /about -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'about' %}">Sobre mí</a>
-                    </li>                                   
+                    {% endif %}
 
                 </ul>
             </div>
