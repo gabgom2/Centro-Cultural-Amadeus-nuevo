@@ -29,9 +29,4 @@ class UsuarioChangeForm(UserChangeForm):
             "email": forms.EmailInput(attrs={"class": "form-control"}),
         }
         
-    # avatar = models.ImageField()
-    # descripcion = models.TextField(blank=True),
-    # ubicacion = models.CharField(max_length=40, blank=True),
-    # sitio_web = models.CharField(max_length=100, blank=True),
-    # fecha_de_nacimiento = models.DateField(null=True)
     
