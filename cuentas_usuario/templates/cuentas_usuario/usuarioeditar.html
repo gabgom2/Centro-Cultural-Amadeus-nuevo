@@ -11,7 +11,6 @@
                 </div>
 
                 <div class="card-body">
-
                     {% if form.errors %}
                         <div class="alert alert-danger">
                             <strong>Revisa los campos:</strong> hay errores en el formulario.
@@ -21,23 +20,18 @@
                     <form method="post" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
 
-                        <!-- Avatar actual / previsualización -->
+                        <!-- Avatar actual -->
                         <div class="text-center mb-3">
-                            {% if usuario.avatar %}
-                                <img id="avatarPreview" src="{{ usuario.avatar.url }}" alt="Avatar de {{ usuario.username }}"
-                                     class="rounded-circle img-thumbnail"
-                                     style="width: 150px; height: 150px; object-fit: cover;">
-                            {% else %}
-                                <img id="avatarPreview" src="{% static 'img/avatar_black.jpg' %}" alt="Avatar por defecto"
-                                     class="rounded-circle img-thumbnail"
-                                     style="width: 150px; height: 150px; object-fit: cover;">
-                            {% endif %}
+                            <img id="avatarPreview"
+                                 src="{% if usuario.avatar %}{{ usuario.avatar.url }}{% else %}{% static 'img/avatar_black.jpg' %}{% endif %}"
+                                 alt="Avatar actual"
+                                 class="rounded-circle img-thumbnail"
+                                 style="width: 150px; height: 150px; object-fit: cover;">
                         </div>
 
-                        <!-- Input de avatar real de Django (oculto) -->
-                        <div style="display:none;">
-                            {{ form.avatar }}
-                        </div>
+                        <!-- Input de avatar oculto dentro del form -->
+                        <input type="file" name="{{ form.avatar.name }}" id="avatarInput" style="display:none;">
+
 
                         <!-- Botón para cambiar avatar -->
                         <div class="mb-3 text-center">
@@ -101,7 +95,6 @@
                     <div class="text-center">
                         <a href="{% url 'usuariodetalle' %}" class="btn btn-outline-secondary btn-sm">Volver al perfil</a>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -109,16 +102,13 @@
 </div>
 
 <script>
-    // Referencias
-    const avatarInput = document.getElementById("{{ form.avatar.id_for_label }}");
+    const avatarInput = document.getElementById("avatarInput");
     const avatarBtn = document.getElementById("avatarBtn");
     const avatarFileName = document.getElementById("avatarFileName");
     const avatarPreview = document.getElementById("avatarPreview");
 
-    // Abrir selector de archivos al clic
     avatarBtn.addEventListener('click', () => avatarInput.click());
 
-    // Previsualización y nombre del archivo
     avatarInput.addEventListener('change', () => {
         if (avatarInput.files && avatarInput.files[0]) {
             avatarFileName.textContent = avatarInput.files[0].name;
