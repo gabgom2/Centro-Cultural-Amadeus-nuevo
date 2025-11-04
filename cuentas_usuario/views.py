@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .forms import UsuarioChangeForm, UsuarioCreationForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -24,14 +25,16 @@ def usuariodetalle(request):
     return render(request, "cuentas_usuario/usuariodetalle.html", {"usuario": request.user})
 
 
+@login_required
 def usuarioeditar(request):
-    if request.method == 'POST':
-        form = UsuarioChangeForm(request.POST, request.FILES, instance=request.user)
+    user = request.user
+    if request.method == "POST":
+        form = UsuarioChangeForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
+            messages.success(request, "Perfil actualizado correctamente.")
             return redirect("usuariodetalle")
     else:
-        form = UsuarioChangeForm(instance=request.user)
-        
-    contexto = {"form": form}
-    return render(request, "cuentas_usuario/usuarioeditar.html", contexto)
+        form = UsuarioChangeForm(instance=user)
+
+    return render(request, "cuentas_usuario/usuarioeditar.html", {"form": form, "usuario": user})
