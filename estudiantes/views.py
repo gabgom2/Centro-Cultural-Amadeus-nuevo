@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import *
+from django.contrib.auth.decorators import login_required
+from app_index.decoradores import staff_required_login_redirect
+#from functools import wraps
 #from django.http import HttpResponse
 
 # Create your views here.
 
 # direcciones de listado query
+
 
 def estudiante_listado(request):
     query = request.GET.get('q', '').strip()
@@ -41,12 +45,14 @@ def estudiante_registro(request):
       
     return render(request, "estudiantes/estudianteregistro.html", {'form': form})
 
+@staff_required_login_redirect
 def estudiante_eliminar(request, dni):
     estudiante = get_object_or_404(Estudiante, dni=dni)
     estudiante.delete()
     messages.success(request, "Estudiante eliminado/a con éxito")
     return redirect("estudiantelistado")
 
+@login_required
 def estudiante_editar(request, dni):
     estudiante = get_object_or_404(Estudiante, dni=dni)
     if request.method == "POST":
@@ -62,6 +68,7 @@ def estudiante_editar(request, dni):
     contexto = {"form":form, "edicion":True}
     return render(request, "estudiantes/estudianteregistro.html", contexto)
 
+@login_required
 def estudiante_detalle(request, dni):
     estudiante = get_object_or_404(Estudiante, dni=dni)
     return render(request, "estudiantes/estudiantedetalle.html", {"estudiante": estudiante})

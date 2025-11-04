@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,5 +136,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 LOGIN_URL = "usuariologin"
 LOGIN_REDIRECT_URL = "usuariodetalle"
-LOGOUT_REDIRECT_URL = "usuariologout"
+LOGOUT_REDIRECT_URL = "/cuentas/login/" #LOGOUT_REDIRECT_URL = reverse_lazy("usuariologout")
 X_FRAME_OPTIONS = 'SAMEORIGIN'

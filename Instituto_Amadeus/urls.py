@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/logout/', LogoutView.as_view(next_page='/admin/login/'), name='admin_logout'), #edit
     path("", include("app_index.urls")),
     path("estudiantes/", include("estudiantes.urls")),
     path("asignaturas/", include("academico.urls")),
