@@ -28,6 +28,7 @@ def estudiante_listado(request):
 
 #FORM estudiantes
 
+@login_required
 def estudiante_registro(request):
 
     # GET - Pedir info a la base de datos
@@ -45,14 +46,14 @@ def estudiante_registro(request):
       
     return render(request, "estudiantes/estudianteregistro.html", {'form': form})
 
-@staff_required_login_redirect
+@staff_required_login_redirect      #Solo staff!
 def estudiante_eliminar(request, dni):
     estudiante = get_object_or_404(Estudiante, dni=dni)
     estudiante.delete()
     messages.success(request, "Estudiante eliminado/a con éxito")
     return redirect("estudiantelistado")
 
-@login_required
+@staff_required_login_redirect
 def estudiante_editar(request, dni):
     estudiante = get_object_or_404(Estudiante, dni=dni)
     if request.method == "POST":
@@ -68,7 +69,7 @@ def estudiante_editar(request, dni):
     contexto = {"form":form, "edicion":True}
     return render(request, "estudiantes/estudianteregistro.html", contexto)
 
-@login_required
+@staff_required_login_redirect
 def estudiante_detalle(request, dni):
     estudiante = get_object_or_404(Estudiante, dni=dni)
     return render(request, "estudiantes/estudiantedetalle.html", {"estudiante": estudiante})

@@ -5,16 +5,18 @@ from django.contrib import messages
 from django.http import FileResponse, Http404
 from .models import Partitura
 from .forms import PartituraForm
-
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 
-class PartituraListView(ListView):
+
+class PartituraListView(LoginRequiredMixin, ListView): # LoginReq Mix: Solo usuarios registrados! 
     model = Partitura
     template_name = "partituras/partituralistado.html"
     context_object_name = "partituras"
 
-class PartituraCreateView(CreateView):
+
+class PartituraCreateView(LoginRequiredMixin, CreateView):
     model = Partitura
     form_class = PartituraForm
     template_name = "partituras/partituraregistro.html"
@@ -25,7 +27,7 @@ class PartituraCreateView(CreateView):
         messages.success(self.request, f"La partitura '{form.instance.titulo}' fue subida correctamente.")
         return super().form_valid(form)
 
-class PartituraDetailView(DetailView):
+class PartituraDetailView(LoginRequiredMixin, DetailView):
     model = Partitura
     template_name = "partituras/partituradetalle.html"
     context_object_name = "partitura"
@@ -48,7 +50,7 @@ class PartituraDetailView(DetailView):
         self.kwargs = {'codigo': codigo}
         return self.ver_pdf(request)
 
-class PartituraUpdateView(UpdateView):
+class PartituraUpdateView(LoginRequiredMixin, UpdateView):
     model = Partitura
     form_class = PartituraForm
     template_name = "partituras/partituraregistro.html"  # plantilla para crear/editar
@@ -61,7 +63,7 @@ class PartituraUpdateView(UpdateView):
         messages.success(self.request, f"La partitura '{self.object.titulo}' fue modificada correctamente.")
         return response
     
-class PartituraDeleteView(DeleteView):
+class PartituraDeleteView(LoginRequiredMixin, DeleteView):
     model = Partitura
     template_name = "partituras/partituraeliminar.html"  # plantilla de confirmación
     slug_field = "codigo"
