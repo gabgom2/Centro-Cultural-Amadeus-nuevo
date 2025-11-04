@@ -71,3 +71,27 @@
             transform: scale(0.98);
             box-shadow: 0 2px 4px rgba(78, 52, 46, 0.3);
         }
+
+        /* Botón gris oscuro personalizado */
+/* Ajustes específicos para el botón de logout con icono */
+        .btn-dark.logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; /* espacio entre icono y texto */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Hover: cambio de fondo y leve efecto "zoom" */
+        .btn-dark.logout-btn:hover {
+            background-color: #495057; /* gris más claro al pasar el mouse */
+            transform: scale(1.05);
+        }
+
+        /* Icono dentro del botón */
+        .btn-dark.logout-btn img {
+            width: 28px;       /* miniatura */
+            height: auto;      
+            object-fit: contain; /* que no se corte */
+            border-radius: 4px;
+        }

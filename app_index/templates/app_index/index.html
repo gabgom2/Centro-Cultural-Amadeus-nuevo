@@ -51,26 +51,27 @@
                     <!-- Botones dinámicos según login -->
                     {% if user.is_authenticated %}
                         <!-- Si el usuario está logeado -->
-                        <li class="nav-item">
-                            <a class="nav-link active d-flex align-items-center" href="{% url 'usuariodetalle' %}">
-                                {% if user.avatar %}
-                                    <img src="{{ user.avatar.url }}" alt="Avatar de {{ user.username }}"
-                                        class="rounded-circle me-2"
-                                        style="width: 30px; height: 30px; object-fit: cover;">
-                                {% else %}
-                                    <img src="{% static 'img/default_avatar.png' %}" alt="Avatar por defecto"
-                                        class="rounded-circle me-2"
-                                        style="width: 30px; height: 30px; object-fit: cover;">
-                                {% endif %}
-                                <span class="fw-bold text-center">{{ user.username }}</span>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <!-- Avatar -->
+                                <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'img/default_avatar.png' %}{% endif %}" 
+                                    alt="{{ user.username }}" 
+                                    class="rounded-circle" 
+                                    style="width: 32px; height: 32px; object-fit: cover; margin-right: 8px;">
+                                <!-- Username -->
+                                <strong>{{ user.username }}</strong>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <form action="{% url 'usuariologout' %}" method="post" style="display:inline;">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-danger">Cerrar sesión</button>
-                            </form>
-                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <form method="post" action="{% url 'usuariologout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item d-flex align-items-center">
+                                            <img src="{% static 'img/logout_icon.png' %}" alt="Logout" style="width:24px; height:auto; margin-right:8px;">
+                                            Cerrar sesión
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
                     {% else %}
                         <!-- Si el usuario NO está logeado -->
