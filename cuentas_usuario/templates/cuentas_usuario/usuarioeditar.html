@@ -7,28 +7,46 @@
         <div class="col-md-8 col-lg-6">
             <div class="card shadow-sm">
                 <div class="card-header bg-dark text-white text-center">
-                    <h4>Mi Perfil</h4>
+                    <h4>Editar Perfil</h4>
                 </div>
 
-                <div class="card-body text-center">
+                <div class="card-body">
 
-                    <!-- Avatar actual / preview y formulario de cambio -->
-                    <form method="post" enctype="multipart/form-data" action="{% url 'usuarioeditar' %}">
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Revisa los campos:</strong> hay errores en el formulario.
+                        </div>
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <img id="avatarPreview" src="{% if usuario.avatar %}{{ usuario.avatar.url }}{% else %}{% static 'img/avatar_black.jpg' %}{% endif %}" 
-                                 alt="Avatar actual" 
-                                 class="rounded-circle img-thumbnail mb-2"
-                                 style="width: 150px; height: 150px; object-fit: cover;">
 
-                            <!-- Input real oculto -->
+                        <!-- Avatar actual / previsualización -->
+                        <div class="text-center mb-3">
+                            {% if usuario.avatar %}
+                                <img id="avatarPreview" src="{{ usuario.avatar.url }}" alt="Avatar de {{ usuario.username }}"
+                                     class="rounded-circle img-thumbnail"
+                                     style="width: 150px; height: 150px; object-fit: cover;">
+                            {% else %}
+                                <img id="avatarPreview" src="{% static 'img/avatar_black.jpg' %}" alt="Avatar por defecto"
+                                     class="rounded-circle img-thumbnail"
+                                     style="width: 150px; height: 150px; object-fit: cover;">
+                            {% endif %}
+                        </div>
+
+                        <!-- Input de avatar real de Django (oculto) -->
+                        <div style="display:none;">
                             {{ form.avatar }}
-                            <button type="button" class="btn btn-outline-primary mt-2" id="avatarBtn">Cambiar avatar</button>
+                        </div>
+
+                        <!-- Botón para cambiar avatar -->
+                        <div class="mb-3 text-center">
+                            <button type="button" class="btn btn-outline-primary" id="avatarBtn">Cambiar avatar</button>
                             <span id="avatarFileName" class="ms-2"></span>
                         </div>
 
-                        <!-- Campos de edición -->
-                        <div class="mb-3 text-start">
+                        <!-- Campos del formulario -->
+                        <div class="mb-3">
                             {{ form.username.label_tag }}
                             {{ form.username }}
                             {% if form.username.errors %}
@@ -36,7 +54,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="mb-3 text-start">
+                        <div class="mb-3">
                             {{ form.descripcion.label_tag }}
                             {{ form.descripcion }}
                             {% if form.descripcion.errors %}
@@ -44,7 +62,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="mb-3 text-start">
+                        <div class="mb-3">
                             {{ form.ubicacion.label_tag }}
                             {{ form.ubicacion }}
                             {% if form.ubicacion.errors %}
@@ -52,7 +70,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="mb-3 text-start">
+                        <div class="mb-3">
                             {{ form.sitio_web.label_tag }}
                             {{ form.sitio_web }}
                             {% if form.sitio_web.errors %}
@@ -60,7 +78,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="mb-3 text-start">
+                        <div class="mb-3">
                             {{ form.email.label_tag }}
                             {{ form.email }}
                             {% if form.email.errors %}
@@ -68,7 +86,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="mb-3 text-start">
+                        <div class="mb-3">
                             {{ form.fecha_de_nacimiento.label_tag }}
                             {{ form.fecha_de_nacimiento }}
                             {% if form.fecha_de_nacimiento.errors %}
@@ -80,14 +98,8 @@
                     </form>
 
                     <hr>
-
-                    <div class="d-flex justify-content-between mt-3">
-                        <a href="{% url 'usuariodetalle' %}" class="btn btn-outline-secondary w-45">Volver al perfil</a>
-
-                        <form action="{% url 'usuariologout' %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger">Cerrar sesión</button>
-                        </form>
+                    <div class="text-center">
+                        <a href="{% url 'usuariodetalle' %}" class="btn btn-outline-secondary btn-sm">Volver al perfil</a>
                     </div>
 
                 </div>
@@ -97,23 +109,20 @@
 </div>
 
 <script>
+    // Referencias
     const avatarInput = document.getElementById("{{ form.avatar.id_for_label }}");
     const avatarBtn = document.getElementById("avatarBtn");
     const avatarFileName = document.getElementById("avatarFileName");
     const avatarPreview = document.getElementById("avatarPreview");
 
-    // Ocultar input original
-    avatarInput.style.display = 'none';
-
-    // Abrir selector de archivos al hacer clic en el botón
+    // Abrir selector de archivos al clic
     avatarBtn.addEventListener('click', () => avatarInput.click());
 
-    // Mostrar nombre del archivo y actualizar previsualización
+    // Previsualización y nombre del archivo
     avatarInput.addEventListener('change', () => {
         if (avatarInput.files && avatarInput.files[0]) {
             avatarFileName.textContent = avatarInput.files[0].name;
 
-            // Preview
             const reader = new FileReader();
             reader.onload = e => avatarPreview.src = e.target.result;
             reader.readAsDataURL(avatarInput.files[0]);
