@@ -4,7 +4,9 @@ from .forms import AsignaturaForm
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from app_index.mixins import StaffRequiredMixin
+
 # Create your views here.
 
 class AsignaturaListView(ListView):
@@ -27,7 +29,7 @@ class AsignaturaListView(ListView):
             
         return query_asignatura
     
-class AsignaturaCreateView(CreateView):
+class AsignaturaCreateView(StaffRequiredMixin, CreateView):
     model = Asignatura
     form_class = AsignaturaForm
     template_name = "academico/asignaturaregistro.html"
@@ -40,14 +42,14 @@ class AsignaturaCreateView(CreateView):
 
         return response
 
-class AsignaturaDetailView(DetailView):
+class AsignaturaDetailView(LoginRequiredMixin, DetailView):
     model = Asignatura
     template_name = "academico/asignaturadetalle.html"
     context_object_name = "asignatura"
     slug_field = "codigo"
     slug_url_kwarg = "codigo"
 
-class AsignaturaUpdateView(UpdateView):
+class AsignaturaUpdateView(StaffRequiredMixin, UpdateView):
     model = Asignatura
     form_class = AsignaturaForm
     template_name = "academico/asignaturaregistro.html"
@@ -61,7 +63,7 @@ class AsignaturaUpdateView(UpdateView):
         return response
 
     
-class AsignaturaDeleteView(DeleteView):
+class AsignaturaDeleteView(StaffRequiredMixin, DeleteView):
     model = Asignatura
     template_name = "academico/asignaturaeliminar.html"
     slug_field = "codigo"
@@ -77,9 +79,3 @@ class AsignaturaDeleteView(DeleteView):
         messages.success(request, f"La asignatura '{obj_name}' fue eliminada correctamente.")
         return redirect(self.success_url)
     
-    #def delete(self, request, *args, **kwargs):
-    #     self.object = self.get_object()
-    #     messages.success(
-    #         request, f"La asignatura '{self.object.nombre}' fue eliminada correctamente."
-    #     )
-    #     return super().delete(request, *args, **kwargs)

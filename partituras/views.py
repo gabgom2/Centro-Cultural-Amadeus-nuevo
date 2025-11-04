@@ -5,7 +5,8 @@ from django.contrib import messages
 from django.http import FileResponse, Http404
 from .models import Partitura
 from .forms import PartituraForm
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from app_index.mixins import StaffRequiredMixin
 
 # Create your views here.
 
@@ -16,7 +17,7 @@ class PartituraListView(LoginRequiredMixin, ListView): # LoginReq Mix: Solo usua
     context_object_name = "partituras"
 
 
-class PartituraCreateView(LoginRequiredMixin, CreateView):
+class PartituraCreateView(StaffRequiredMixin, CreateView):
     model = Partitura
     form_class = PartituraForm
     template_name = "partituras/partituraregistro.html"
@@ -50,7 +51,7 @@ class PartituraDetailView(LoginRequiredMixin, DetailView):
         self.kwargs = {'codigo': codigo}
         return self.ver_pdf(request)
 
-class PartituraUpdateView(LoginRequiredMixin, UpdateView):
+class PartituraUpdateView(StaffRequiredMixin, UpdateView):
     model = Partitura
     form_class = PartituraForm
     template_name = "partituras/partituraregistro.html"  # plantilla para crear/editar
@@ -63,7 +64,7 @@ class PartituraUpdateView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, f"La partitura '{self.object.titulo}' fue modificada correctamente.")
         return response
     
-class PartituraDeleteView(LoginRequiredMixin, DeleteView):
+class PartituraDeleteView(StaffRequiredMixin, DeleteView):
     model = Partitura
     template_name = "partituras/partituraeliminar.html"  # plantilla de confirmación
     slug_field = "codigo"
