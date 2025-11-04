@@ -32,13 +32,19 @@ class UsuarioCreationForm(UserCreationForm):
 class UsuarioChangeForm(forms.ModelForm):
     password1 = forms.CharField(
         label="Nueva contraseña",
-        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        widget=forms.PasswordInput(attrs={
+            "class": "form-control",
+            "placeholder": "Dejar vacío si no quieres cambiar la contraseña"
+        }),
         required=False,
-        help_text="Dejar vacío si no quieres cambiarla."
+        help_text="La contraseña debe tener al menos 8 caracteres."
     )
     password2 = forms.CharField(
         label="Confirmar nueva contraseña",
-        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        widget=forms.PasswordInput(attrs={
+            "class": "form-control",
+            "placeholder": "Confirma la nueva contraseña"
+        }),
         required=False
     )
 
