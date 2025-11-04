@@ -18,7 +18,7 @@
                              class="rounded-circle img-thumbnail mb-3"
                              style="width: 150px; height: 150px; object-fit: cover;">
                     {% else %}
-                        <img src="{% static 'img/default_avatar.png' %}" alt="Avatar por defecto"
+                        <img src="{% static 'img/avatar_black.jpg' %}" alt="Avatar por defecto"
                              class="rounded-circle img-thumbnail mb-3"
                              style="width: 150px; height: 150px; object-fit: cover;">
                     {% endif %}
@@ -55,7 +55,12 @@
 
                     <div class="d-flex justify-content-between">
                         <a href="{% url 'usuarioeditar' %}" class="btn btn-primary w-45">Editar perfil</a>
-                        <a href="{% url 'usuariologout' %}" class="btn btn-outline-danger w-45">Cerrar sesión</a>
+                        
+
+                        <form action="{% url 'usuariologout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger">Cerrar sesión</button>
+                        </form>
                     </div>
 
                 </div>
