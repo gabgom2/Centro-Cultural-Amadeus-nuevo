@@ -10,7 +10,7 @@ class UsuarioCreationForm(UserCreationForm):
 class UsuarioChangeForm(UserChangeForm):
     class Meta:
         model = Usuario
-        fields = ["username", "descripcion", "ubicacion", "sitio_web", "email", "fecha_de_nacimiento"]
+        fields = ["username", "descripcion", "ubicacion", "sitio_web", "email", "fecha_de_nacimiento", "avatar"]
         exclude = ("id",)
         widgets = {
             "descripcion": forms.Textarea(attrs={

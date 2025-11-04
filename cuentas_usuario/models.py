@@ -10,7 +10,8 @@ class Usuario(AbstractUser):
         upload_to=avatar_upload_to,
         default="default/avatar_black.jpg",
         blank=True,
-        
+        null=True,
+        verbose_name="Avatar"
         
     )
     descripcion = models.TextField(blank=True)
