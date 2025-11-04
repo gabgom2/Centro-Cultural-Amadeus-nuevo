@@ -1,6 +1,6 @@
 {% extends "app_index/index.html" %}
-{% block contenido_principal %}
 
+{% block contenido_principal %}
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -29,45 +29,56 @@
                             </div>
                         {% endif %}
 
-                        <!-- Avatar -->
+                        <!-- Botón para cambiar avatar -->
+                        <div class="mb-3 text-center">
+                            {{ form.avatar }}  {# input real de Django #}
+                            <button type="button" class="btn btn-outline-primary" id="avatarBtn">Cambiar avatar</button>
+                            <span id="avatarFileName" class="ms-2"></span>
+                        </div>
+
+                        <!-- Campos del formulario -->
                         <div class="mb-3">
-                            <label for="{{ form.avatar.id_for_label }}" class="form-label">Cambiar avatar</label>
-                            {{ form.avatar }}
-                            {% if form.avatar.errors %}
-                                <div class="text-danger small">{{ form.avatar.errors }}</div>
+                            {{ form.username.label_tag }}
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="text-danger small">{{ form.username.errors }}</div>
                             {% endif %}
                         </div>
 
-                        <!-- Descripción -->
                         <div class="mb-3">
-                            <label for="{{ form.descripcion.id_for_label }}" class="form-label">Descripción</label>
+                            {{ form.descripcion.label_tag }}
                             {{ form.descripcion }}
                             {% if form.descripcion.errors %}
                                 <div class="text-danger small">{{ form.descripcion.errors }}</div>
                             {% endif %}
                         </div>
 
-                        <!-- Ubicación -->
                         <div class="mb-3">
-                            <label for="{{ form.ubicacion.id_for_label }}" class="form-label">Ubicación</label>
+                            {{ form.ubicacion.label_tag }}
                             {{ form.ubicacion }}
                             {% if form.ubicacion.errors %}
                                 <div class="text-danger small">{{ form.ubicacion.errors }}</div>
                             {% endif %}
                         </div>
 
-                        <!-- Sitio web -->
                         <div class="mb-3">
-                            <label for="{{ form.sitio_web.id_for_label }}" class="form-label">Sitio web</label>
+                            {{ form.sitio_web.label_tag }}
                             {{ form.sitio_web }}
                             {% if form.sitio_web.errors %}
                                 <div class="text-danger small">{{ form.sitio_web.errors }}</div>
                             {% endif %}
                         </div>
 
-                        <!-- Fecha de nacimiento -->
                         <div class="mb-3">
-                            <label for="{{ form.fecha_de_nacimiento.id_for_label }}" class="form-label">Fecha de nacimiento</label>
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger small">{{ form.email.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.fecha_de_nacimiento.label_tag }}
                             {{ form.fecha_de_nacimiento }}
                             {% if form.fecha_de_nacimiento.errors %}
                                 <div class="text-danger small">{{ form.fecha_de_nacimiento.errors }}</div>
@@ -86,4 +97,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Hacer que el botón de avatar funcione
+    const avatarInput = document.getElementById("{{ form.avatar.id_for_label }}");
+    const avatarBtn = document.getElementById("avatarBtn");
+    const avatarFileName = document.getElementById("avatarFileName");
+
+    // Ocultar input original
+    avatarInput.style.display = 'none';
+
+    // Abrir selector de archivos al hacer clic en el botón
+    avatarBtn.addEventListener('click', () => avatarInput.click());
+
+    // Mostrar nombre del archivo seleccionado
+    avatarInput.addEventListener('change', () => {
+        if (avatarInput.files.length > 0) {
+            avatarFileName.textContent = avatarInput.files[0].name;
+        } else {
+            avatarFileName.textContent = '';
+        }
+    });
+</script>
+
 {% endblock %}

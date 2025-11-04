@@ -4,7 +4,7 @@ from .views import usuariodetalle, usuarioeditar, usuarioregistrar
 
 urlpatterns = [
     path("login/", LoginView.as_view(template_name="cuentas_usuario/usuariologin.html"), name="usuariologin"),
-    path("logout/", LogoutView.as_view(template_name="cuentas_usuario/usuariologout.html"), name="usuariologout"),
+    path("logout/", LogoutView.as_view(next_page='index'), name="usuariologout"),
     path("detalle/", usuariodetalle, name="usuariodetalle"),
     path("editar/", usuarioeditar, name="usuarioeditar"),
     path("registrar/", usuarioregistrar, name="usuarioregistrar"),

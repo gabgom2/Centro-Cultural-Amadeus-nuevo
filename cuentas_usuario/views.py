@@ -26,7 +26,7 @@ def usuariodetalle(request):
 
 def usuarioeditar(request):
     if request.method == 'POST':
-        form = UsuarioChangeForm(request.POST, request.FILE, instance=request.user)
+        form = UsuarioChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect("usuariodetalle")

@@ -1,6 +1,7 @@
 
 {% extends "app_index/index.html" %}
 {% block contenido_principal %}
+{% load static %}
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -56,6 +57,7 @@
                         <a href="{% url 'usuarioeditar' %}" class="btn btn-primary w-45">Editar perfil</a>
                         <a href="{% url 'usuariologout' %}" class="btn btn-outline-danger w-45">Cerrar sesión</a>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -13,10 +13,10 @@ class Usuario(AbstractUser):
         
         
     )
-    descripcion = models.TextField(blank=True),
-    ubicacion = models.CharField(max_length=40, blank=True),
-    sitio_web = models.CharField(max_length=100, blank=True),
-    fecha_de_nacimiento = models.DateField(null=True)
+    descripcion = models.TextField(blank=True)
+    ubicacion = models.CharField(max_length=40, blank=True)
+    sitio_web = models.CharField(max_length=100, blank=True)
+    fecha_de_nacimiento = models.DateField(null=True, blank=True)
     
     def __str__(self):
         return f"Usuario: {self.username} / Mail: {self.email} / Es staff: {self.is_staff} / Es superuser: {self.is_superuser}"

@@ -34,12 +34,18 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'estudiantelistado' %}">Estudiantes</a></li>
                             <li><a class="dropdown-item" href="{% url 'asignaturalistado' %}">Asignaturas</a></li>
+                            <li><a class="dropdown-item" href="{% url 'partituralistado' %}">Partituras</a></li>
                         </ul>
                     </li>
                     
-                    <!-- Partituras -->
+                    <!-- Registrarse -->
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'partituralistado' %}">Partituras</a>
+                        <a class="nav-link active" href="{% url 'usuarioregistrar' %}">Registrarse</a>
+                    </li> 
+
+                    <!-- Admin, borrar en versión final -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/">Admin</a>
                     </li> 
                     
                     <!-- Página /about -->

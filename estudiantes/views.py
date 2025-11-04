@@ -33,7 +33,7 @@ def estudiante_registro(request):
         form = EstudianteForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Estudiante registrado/a con éxito.")
+            messages.success(request, "Estudiante agregado/a con éxito.")
             return redirect("estudiantelistado")
             #form = EstudianteForm()  # limpiar el formulario
     else:
@@ -44,7 +44,7 @@ def estudiante_registro(request):
 def estudiante_eliminar(request, dni):
     estudiante = get_object_or_404(Estudiante, dni=dni)
     estudiante.delete()
-    messages.success(request, "Estudiante eliminado con éxito")
+    messages.success(request, "Estudiante eliminado/a con éxito")
     return redirect("estudiantelistado")
 
 def estudiante_editar(request, dni):
@@ -53,7 +53,7 @@ def estudiante_editar(request, dni):
         form = EstudianteForm(request.POST, instance=estudiante)
         if form.is_valid():
             form.save()
-            messages.success(request, "Estudiante modificado con éxito.")
+            messages.success(request, "Estudiante modificado/a con éxito.")
             #form = EstudianteForm()  # limpiar el formulario       
             return redirect("estudiantelistado")
     else:        # IF request.method == GET / debería instanciar un formulario si lo voy a enviar por contexto

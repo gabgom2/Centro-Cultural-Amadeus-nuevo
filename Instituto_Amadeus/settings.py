@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'academico',    #asignaturas, CBV
     'cuentas_usuario',   #sistema de login y permisos
     'partituras',    #CBV permite subir archivos por cada instancia
+    'widget_tweaks', #Para el botón de avatar
 ]
 
 MIDDLEWARE = [
