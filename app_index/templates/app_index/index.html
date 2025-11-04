@@ -38,10 +38,30 @@
                         </ul>
                     </li>
                     
-                    <!-- Registrarse -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'usuarioregistrar' %}">Registrarse</a>
-                    </li> 
+                    <!-- Botones dinámicos según login -->
+                    {% if user.is_authenticated %}
+                        <!-- Si el usuario está logeado -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'usuariodetalle' %}">
+                                👤 {{ user.username }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{% url 'usuariologout' %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger">Cerrar sesión</button>
+                            </form>
+                            </a>
+                        </li>
+                    {% else %}
+                        <!-- Si el usuario NO está logeado -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'usuarioregistrar' %}">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'usuariologin' %}">Iniciar sesión</a>
+                        </li>
+                    {% endif %} 
 
                     <!-- Admin, borrar en versión final -->
                     <li class="nav-item">
